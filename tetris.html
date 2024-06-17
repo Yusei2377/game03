@@ -2,16 +2,26 @@
     <html lang="ja">
     <head>
         <meta charset="utf-8">
+        <!-- <meta http-equiv="refresh" content="5">  -->
+        <!-- 最後消す -->
         <title>テトリス</title>
     </head>
     <body>
         <center>
             <h1>テトリス</h1>
-
-            <canvas id="myCanvas" width="200" height="400" style="background-color: white;"></canvas>
+            <div style="float: left;">
+                <canvas id="myCanvas1" width="150" height="150" style="background-color: white; border: 1px black solid;"></canvas>
+            </div>
+            <div style="float: left;">
+                <canvas id="myCanvas2" width="200" height="400" style="background-color: white; border: 1px black solid;"></canvas>
+            </div>
+            <div style="float: left;">
+                <canvas id="myCanvas3" width="150" height="300" style="background-color: white; border: 1px black solid;"></canvas>
+            </div>
             <br>
-            <button onclick="">スタート</button>
+            <!-- <button onclick="start()">スタート</button> -->
         </center>
     </body>
+    <script src="mino.js"></script>
     <script src="tetris.js"></script>
 </html>
