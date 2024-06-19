@@ -17,7 +17,7 @@ for(let i = 0; i < 20; i++){  // 列
 }
 
 let gameStatus = 0;
-
+let color;
 const board = [
     [0,0,0,0,0,0,0,0,0,0], //0
     [0,0,0,0,0,0,0,0,0,0], 
@@ -50,9 +50,8 @@ for(let i = 0; i < 7; i++){
     randomBox.push(selectMino);
 }
 console.log(randomBox);
-
 let pickMino = randomBox[0];
-const color = "red";
+minoColor();
 console.log(pickMino);
 for(let i = 0; i < pickMino.length; i++){ //ミノ描画
     for(let j = 0; j < pickMino[i].length; j++){
@@ -66,44 +65,43 @@ for(let i = 0; i < pickMino.length; i++){ //ミノ描画
     }
 }
 
-function rotateLeft(){
-    let baseMino = pickMino;
-    // pickMino = [];
-    let baseJ = 0;
-    // let x = 0;
-    console.log(baseMino.length);
-    // console.log("0" + x);
-    for(let i = 0; i < baseMino.length; i++){
-        console.log(baseMino[i].length);
-        for(let j = 0; j < baseMino[i].length; j++){
-            baseJ = baseMino[i].length - j-1;
-            // x = baseJ
-            // baseJ -= j;
-            pickMino[i][j] = baseMino[i][baseJ];
-            // console.log(baseMino[baseMino[i].length-baseMino[j]][i]);
-            // console.log(baseJ);
-        }
-    }
-    console.log(pickMino);
-    for(let i = 0; i < pickMino.length; i++){ //ミノ描画
-        for(let j = 0; j < pickMino[i].length; j++){
-            if(pickMino[i][j] === 1){
-                ctx2.fillStyle = color;
-                ctx2.strokeRect
-                ctx2.fillRect(j * squareSize + squareSize, i * squareSize + squareSize, squareSize, squareSize);
-                ctx2.fillStyle = "black"
-                ctx2.strokeRect(j * squareSize + squareSize, i * squareSize + squareSize, squareSize, squareSize);
-                // ctx2.fill();
-            }
-        }
-    }
+function minoFall(){
+
 }
 
+// function rotateLeft(){
+//     let baseMino = pickMino;
+//     let baseJ = 0;
+//     console.log(baseMino.length);
+//     for(let i = 0; i < baseMino.length; i++){
+//         console.log(baseMino[i].length);
+//         for(let j = 0; j < baseMino[i].length; j++){
+//             baseJ = baseMino[i].length - j - 1;
+//             pickMino[i][j] = baseMino[baseJ][i];
+//             // console.log(baseMino[baseMino[i].length-baseMino[j]][i]);
+//             console.log("("+baseJ+","+i+") = "+baseMino[baseJ][i]);
+//         }
+//     }
+//     console.log(pickMino);
+//     for(let i = 0; i < pickMino.length; i++){ //ミノ描画
+//         for(let j = 0; j < pickMino[i].length; j++){
+//             if(pickMino[i][j] === 1){
+//                 ctx2.fillStyle = color;
+//                 ctx2.strokeRect
+//                 ctx2.fillRect(j * squareSize + squareSize, i * squareSize + squareSize, squareSize, squareSize);
+//                 ctx2.fillStyle = "black"
+//                 ctx2.strokeRect(j * squareSize + squareSize, i * squareSize + squareSize, squareSize, squareSize);
+//                 // ctx2.fill();
+//             }
+//         }
+//     }
+// }
+
 addEventListener('keydown', (event) => {
-    if (event.key === 'ArrowLeft') {
+    if (event.key === 'ArrowLeft'){
+        // rotateLeft();
         console.log("left");
-        rotateLeft();
-    } else if (event.key === 'ArrowRight') {
+    } else if (event.key === 'ArrowRight'){
     //   rotateRight();
         console.log("right");
     }
