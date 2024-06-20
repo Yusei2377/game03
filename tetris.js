@@ -55,12 +55,8 @@ function gameplay(){
     randomMino();
     console.log(randomBox);
     pickMino = randomBox[0];
-    console.log("pickMino"+pickMino);
     randomBox.shift();
-    // clearField();
     drawMino();
-    // standByMino();
-    // checkField();
 }
 
 function checkField(){
@@ -73,11 +69,9 @@ function checkField(){
 }
 
 function clearField(){
-    // console.log("checkField");
     for(let col = 0; col < 20; col++){
         for(let row = 0; row < 10; row++){
             if(field[col][row] === 1){
-                // console.log(col,row);
                 ctx2.fillStyle = "rgba(0,0,0,0)";
                 ctx2.beginPath();
                 ctx2.clearRect(0,0,200,400);
@@ -101,7 +95,7 @@ function clearField(){
 //     time / 4;
 // },2000)
 
-function minoFall(time){
+function minoFall(){
     setInterval(function(){
         // console.log(time);
         clearField();
@@ -136,24 +130,42 @@ function moveRight(){
     drawMino();
 }
 
-// function rotate(){
-//     let baseMino = pickMino;
-//     pickMino = [];
-//     console.log(baseMino);
-//     for(let col = 0; col < baseMino.length; col++){
-//         pickMino.push([]);
-//         for(let row = 0; row < baseMino[col].length; row++){
-//             if(pickMino.length === baseMino[col.length]){
-//                 continue;
-//             }else{
-//                 pickMino.push([]);
-//             }
-//         }
-//         pickMino[]
-//     }
-//     console.log(pickMino);
-//     drawMino();
-// }
+function rotate(){
+    // clearField();
+    // console.log(1);
+    // console.log(pickMino);
+    // let baseMino = pickMino;
+    // // pickMino = [];
+    // for(let row = 0; row < baseMino[0].length; row++){
+    // for(let col = 0; col < baseMino.length; col++){
+    //     // for(let row = 0; row < baseMino[0].length; row++){
+    //         // pickMino[col][row] = baseMino[row][col];
+    //         pickMino[row][col] = baseMino[col][3-row];
+    //     }
+    // }
+    // console.log(2);
+    // console.log(pickMino);
+    // // ctx2.clearRect(0,0,200,400);
+    // drawMino();
+
+    clearField(); // フィールドをクリア
+  console.log(1); // 処理開始ログ
+  console.log(pickMino); // 回転前のミノの状態
+  let baseMino = pickMino; // 回転前のミノを保持
+
+  // pickMinoは初期化不要
+
+  for (let row = 0; row < baseMino[0].length; row++) {
+    for (let col = 0; col < baseMino.length; col++) {
+      pickMino[row][col] = baseMino[col][3 - row];
+    }
+  }
+
+  console.log(2); // 処理完了ログ
+  console.log(pickMino); // 回転後のミノの状態
+  drawMino(); // 回転後のミノを描画
+
+}
 
 function standByMino(){
     let nextMino = [];
@@ -188,7 +200,7 @@ addEventListener('keydown', (event) => { //キー操作
         // console.log("right");
     }else if(event.key === 'ArrowUp'){
         rotate();
-        console.log("up");
+        // console.log("up");
     }else if(event.key === 'ArrowDown'){
     //   rotateRight();
         console.log("down");
@@ -201,10 +213,7 @@ function start(){
     if(gameStatus === 0){
         checkField();
         gameplay();
-        setInterval(function(){
-            time = time / 4;
-        },2000)
-        minoFall(time);
+        minoFall();
         // checkLand();
     }
     gameStatus = 1;
