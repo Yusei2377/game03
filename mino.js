@@ -59,40 +59,33 @@ function nextMinoColor(){
 }
 
 function drawMino(){ //ミノ描画
-    clearField();
     minoKinds = pickMino;
     pickMinoColor();
     for(let col = 0; col < pickMino.length; col++){
         for(let row = 0; row < pickMino[col].length; row++){
-            let x = row * squareSize + squareSize * 3;
+            let x = row * squareSize + squareSize * (3 + horaizon);
             let y = col * squareSize + squareSize * fall;
-            let fx = x / 20;
-            let fy = y / 20;
+            // console.log(y);
+            let fx = x / squareSize;
+            let fy = y / squareSize;
             if(pickMino[col][row] === 1){
                 field[fy][fx] = 1;
+                ctx2.fillStyle = color;
+                ctx2.fillRect(x, y, squareSize, squareSize);
                 ctx2.fillStyle = "black"
                 ctx2.strokeRect(x, y, squareSize, squareSize);
-                ctx2.fillStyle = color;
-                // ctx2.strokeRect
-                ctx2.fillRect(x, y, squareSize, squareSize);
-                // console.log(y,x);
-                // console.log(field[fy][fx]);
             }
             pickMinoX = fx;
             pickMinoY = fy;
-            // ctx2.fillStyle = "black"
-            // ctx2.strokeRect(x, y, squareSize, squareSize);
         }
     }
-    // console.log(field);
-    // pickMinoX = fx;
-    // pickMinoY = fy;
     checkField();
 }
 
 function drawNextMino(nextMino,verticalPos){ //ミノ描画
     minoKinds = nextMino;
     nextMinoColor();
+    console.log(nextMino);
     for(let col = 0; col < nextMino.length; col++){
         for(let row = 0; row < nextMino[col].length; row++){
             if(nextMino[col][row] === 1){

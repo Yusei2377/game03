@@ -22,6 +22,7 @@ let pickMinoX,pickMinoY;
 let color;
 let minoKinds;
 let fall = 0;
+let horaizon = 0;
 let time = 1000;
 
 let randomBox = [];
@@ -54,10 +55,11 @@ function gameplay(){
     randomMino();
     console.log(randomBox);
     pickMino = randomBox[0];
+    console.log("pickMino"+pickMino);
     randomBox.shift();
     // clearField();
     drawMino();
-    standByMino();
+    // standByMino();
     // checkField();
 }
 
@@ -65,116 +67,144 @@ function checkField(){
     for(let col = 0; col < 20; col++){
         for(let row = 0; row < 10; row++){
             if(field[col][row] === 1){
-                // console.log("field(" + col + "," + row + ")");
             }
-            // ctx2.fillStyle = "rgb(0,0,0))";
-            // ctx2.strokeRect(col,row,squareSize,squareSize);
         }
-        // console.log(field);
     }
 }
 
 function clearField(){
-    console.log("checkField");
+    // console.log("checkField");
     for(let col = 0; col < 20; col++){
         for(let row = 0; row < 10; row++){
             if(field[col][row] === 1){
-                console.log(col,row);
-                ctx2.beginPath();
+                // console.log(col,row);
                 ctx2.fillStyle = "rgba(0,0,0,0)";
-                ctx2.clearRect(0,0,200,400);
                 ctx2.beginPath();
+                ctx2.clearRect(0,0,200,400);
                 field[col][row] = 0;
             }
         }
     }
 }
 
-function checkLand(){
-    if(pickMinoY === 19){
-        
-        console.log("stop");
-        pickMino = standByMinoBox[0];
-        standByMinoBox.shift();
-    }
-}
+// function checkLand(){
+//     if(pickMinoY === 19){
+//         fall -= 1;
+//         field[pickMinoY][pickMinoX] = 1;
+//         console.log("stop");
+//         pickMino = standByMinoBox[0];
+//         standByMinoBox.shift();
+//         return;
+//     }
+// }
+// setInterval(function(){
+//     time / 4;
+// },2000)
 
-function minoFall(){
+function minoFall(time){
     setInterval(function(){
-        // clearField();
+        // console.log(time);
+        clearField();
         fall += 1;
         drawMino();
-        console.log(field);
-        // if(pickMinoY === 19){
-        //     console.log("stop");
-        //     return;
-        // }
-        checkLand();
+        if(pickMinoY === 19){
+            field[pickMinoY][pickMinoX] = 1;
+            fall = -1;
+            // console.log("stop");
+            // console.log(field);
+            return;
+        }
+        // checkLand();
     },time);
 }
 
 function moveLeft(){
-    pickMino
+    if(pickMinoX - pickMino[0].length +1 === 0){
+        return;
+    }
+    clearField();
+    horaizon -= 1;
+    drawMino();
 }
 
-// function rotateLeft(){
+function moveRight(){
+    if(pickMinoX === 9){
+        return;
+    }
+    clearField();
+    horaizon += 1;
+    drawMino();
+}
+
+// function rotate(){
 //     let baseMino = pickMino;
-//     let baseJ = 0;
-//     console.log(baseMino.length);
+//     pickMino = [];
+//     console.log(baseMino);
 //     for(let col = 0; col < baseMino.length; col++){
-//         console.log(baseMino[col].length);
-//         for(let row = 0; row < baseMino[i].length; row++){
-//             baseJ = baseMino[col].length - row - 1;
-//             pickMino[col][row] = baseMino[row][col];
-//             // console.log(baseMino[baseMino[col].length-baseMino[row]][col]);
-//             // console.log("("+baseJ+","+col+") = "+baseMino[baseJ][col]);
+//         pickMino.push([]);
+//         for(let row = 0; row < baseMino[col].length; row++){
+//             if(pickMino.length === baseMino[col.length]){
+//                 continue;
+//             }else{
+//                 pickMino.push([]);
+//             }
 //         }
+//         pickMino[]
 //     }
 //     console.log(pickMino);
 //     drawMino();
 // }
 
 function standByMino(){
-    let nextMino;
+    let nextMino = [];
     let verticalPos = 0;
     for(let i = 0; i = randomBox.length; i++){
-        standByMinoBox.push = randomBox[i];
-        // nextMino = randomBox[i];
-        // drawNextMino(nextMino,verticalPos);
-        // verticalPos += nextMino.length + 1;
-        randomBox.shift();
-        // nextMino = [];
-    }
-    for(let j = 0; j = standByMinoBox.length; j++){
-        nextMino = standByMinoBox[j];
+        // standByMinoBox.push(randomBox[i]);
+        // console.log(standByMinoBox.length);
+        nextMino = randomBox[i];
+        // nextMino.push(standByMino[i]);
+        // console.log(nextMino);
         drawNextMino(nextMino,verticalPos);
         verticalPos += nextMino.length + 1;
-        nextMino = [];
+        // randomBox.shift();
+        nextMino.shift();
     }
-    minoBox = [minoI,minoO,minoS,minoZ,minoJ,minoL,minoT];
+    // console.log("("+2+")"+standByMinoBox.length);
+    // for(let j = 0; j = standByMinoBox.length; j++){
+    //     nextMino = standByMinoBox[j];
+    //     drawNextMino(nextMino,verticalPos);
+    //     verticalPos += nextMino.length + 1;
+    //     nextMino = [];
+    // }
+    // minoBox = [minoI,minoO,minoS,minoZ,minoJ,minoL,minoT];
 }
 
 addEventListener('keydown', (event) => { //キー操作
     if(event.key === 'ArrowLeft'){
         moveLeft();
-        console.log("left");
+        // console.log("left");
     }else if(event.key === 'ArrowRight'){
-    //   rotateRight();
-        console.log("right");
+        moveRight();
+        // console.log("right");
     }else if(event.key === 'ArrowUp'){
-    //   rotateLeft();
+        rotate();
         console.log("up");
     }else if(event.key === 'ArrowDown'){
     //   rotateRight();
         console.log("down");
-        }
+    }else if(event.key === " "){
+        start();
+    }
     });
 
 function start(){
     if(gameStatus === 0){
         checkField();
         gameplay();
-        minoFall();
+        setInterval(function(){
+            time = time / 4;
+        },2000)
+        minoFall(time);
         // checkLand();
     }
     gameStatus = 1;
