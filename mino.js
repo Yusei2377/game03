@@ -1,16 +1,16 @@
-const minoI = [[0,0,0,0],[0,0,0,0],[0,0,0,0],[1,1,1,1]];
+const minoI = [[0,0,0,0],[1,1,1,1],[0,0,0,0],[0,0,0,0]];
 
-const minoO = [[0,0],[0,0],[1,1],[1,1]];
+const minoO = [[0,0,0,0],[1,1,0,0],[1,1,0,0],[0,0,0,0]];
 
-const minoS = [[0,0,0],[0,0,0],[0,1,1],[1,1,0]];
+const minoS = [[0,0,0,0],[0,1,1,0],[1,1,0,0],[0,0,0,0]];
 
-const minoZ = [[0,0,0],[0,0,0],[1,1,0],[0,1,1]];
+const minoZ = [[0,0,0,0],[1,1,0,0],[0,1,1,0],[0,0,0,0]];
 
-const minoJ = [[0,0,0],[0,0,0],[1,0,0],[1,1,1]];
+const minoJ = [[0,0,0,0],[1,0,0,0],[1,1,1,0],[0,0,0,0]];
 
-const minoL = [[0,0,0],[0,0,0],[0,0,1],[1,1,1]];
+const minoL = [[0,0,0,0],[0,0,1,0],[1,1,1,0],[0,0,0,0]];
 
-const minoT = [[0,0,0],[0,0,0],[0,1,0],[1,1,1]];
+const minoT = [[0,0,0,0],[1,0,0,0],[1,1,1,0],[0,0,0,0]];
 
 let minoBox = [minoI,minoO,minoS,minoZ,minoJ,minoL,minoT];
 
@@ -62,12 +62,12 @@ function drawMino(){ //ミノ描画
     minoKinds = pickMino;
     pickMinoColor();
     for(let col = 0; col < pickMino.length; col++){
-        for(let row = 0; row < pickMino[col].length; row++){
-            let x = row * squareSize + squareSize * (3 + horaizon);
-            let y = (col -2)* squareSize + squareSize * fall;
+        for(let row = 0; row < pickMino.length; row++){
+            let x = (row + horaizon) * squareSize;
+            let y = (col + fall)* squareSize;
             // console.log(y);
-            let fx = x / squareSize;
-            let fy = y / squareSize;
+            let fx = row + horaizon;
+            let fy = col + fall;
             if(pickMino[col][row] === 1){
                 field[fy][fx] = 1;
                 ctx2.fillStyle = color;

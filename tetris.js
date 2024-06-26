@@ -131,40 +131,20 @@ function moveRight(){
 }
 
 function rotate(){
-    // clearField();
-    // console.log(1);
-    // console.log(pickMino);
-    // let baseMino = pickMino;
-    // // pickMino = [];
-    // for(let row = 0; row < baseMino[0].length; row++){
-    // for(let col = 0; col < baseMino.length; col++){
-    //     // for(let row = 0; row < baseMino[0].length; row++){
-    //         // pickMino[col][row] = baseMino[row][col];
-    //         pickMino[row][col] = baseMino[col][3-row];
-    //     }
-    // }
-    // console.log(2);
-    // console.log(pickMino);
-    // // ctx2.clearRect(0,0,200,400);
-    // drawMino();
-
-    clearField(); // フィールドをクリア
-  console.log(1); // 処理開始ログ
-  console.log(pickMino); // 回転前のミノの状態
-  let baseMino = pickMino; // 回転前のミノを保持
-
-  // pickMinoは初期化不要
-
-  for (let row = 0; row < baseMino[0].length; row++) {
-    for (let col = 0; col < baseMino.length; col++) {
-      pickMino[row][col] = baseMino[col][3 - row];
+    clearField();
+    console.log(1);
+    console.log(pickMino);
+    let baseMino = [[],[],[],[]];
+    
+    for(let col = 0; col < baseMino.length; col++){
+        for(let row = 0; row < baseMino.length; row++){
+            baseMino[col][row] = pickMino[row][baseMino.length - 1 - col];
+        }
     }
-  }
-
-  console.log(2); // 処理完了ログ
-  console.log(pickMino); // 回転後のミノの状態
-  drawMino(); // 回転後のミノを描画
-
+    pickMino = baseMino;
+    console.log(2);
+    console.log(pickMino);
+    drawMino();
 }
 
 function standByMino(){
