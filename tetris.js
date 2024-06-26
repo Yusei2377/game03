@@ -81,34 +81,17 @@ function clearField(){
     }
 }
 
-// function checkLand(){
-//     if(pickMinoY === 19){
-//         fall -= 1;
-//         field[pickMinoY][pickMinoX] = 1;
-//         console.log("stop");
-//         pickMino = standByMinoBox[0];
-//         standByMinoBox.shift();
-//         return;
-//     }
-// }
-// setInterval(function(){
-//     time / 4;
-// },2000)
-
 function minoFall(){
     setInterval(function(){
-        // console.log(time);
         clearField();
         fall += 1;
         drawMino();
         if(pickMinoY === 19){
             field[pickMinoY][pickMinoX] = 1;
             fall = -1;
-            // console.log("stop");
-            // console.log(field);
             return;
         }
-        // checkLand();
+        standByMino();
     },time);
 }
 
@@ -155,11 +138,15 @@ function standByMino(){
         // console.log(standByMinoBox.length);
         nextMino = randomBox[i];
         // nextMino.push(standByMino[i]);
-        // console.log(nextMino);
+        console.log(nextMino);
         drawNextMino(nextMino,verticalPos);
         verticalPos += nextMino.length + 1;
-        // randomBox.shift();
-        nextMino.shift();
+        randomBox.shift();
+        // nextMino.shift();
+    }
+    if(randomBox.length === 0){
+        // minoBox = [minoI,minoO,minoS,minoZ,minoJ,minoL,minoT];
+        randomMino();
     }
     // console.log("("+2+")"+standByMinoBox.length);
     // for(let j = 0; j = standByMinoBox.length; j++){
@@ -174,15 +161,11 @@ function standByMino(){
 addEventListener('keydown', (event) => { //キー操作
     if(event.key === 'ArrowLeft'){
         moveLeft();
-        // console.log("left");
     }else if(event.key === 'ArrowRight'){
         moveRight();
-        // console.log("right");
     }else if(event.key === 'ArrowUp'){
         rotate();
-        // console.log("up");
     }else if(event.key === 'ArrowDown'){
-    //   rotateRight();
         console.log("down");
     }else if(event.key === " "){
         start();
@@ -194,7 +177,6 @@ function start(){
         checkField();
         gameplay();
         minoFall();
-        // checkLand();
     }
     gameStatus = 1;
 }
