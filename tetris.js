@@ -24,7 +24,6 @@ let minoKinds;
 let fall = 0;
 let horaizon = 0;
 let time = 1000;
-
 let randomBox = [];
 let standByMinoBox = [];
 
@@ -86,7 +85,7 @@ function minoFall(){
         clearField();
         fall += 1;
         drawMino();
-        if(pickMinoY === 19){
+        if(pickMino[pickMinoY][pickMinoX] === 1 && pickMinoY === 19 ){
             field[pickMinoY][pickMinoX] = 1;
             fall = -1;
             return;
@@ -118,7 +117,6 @@ function rotate(){
     console.log(1);
     console.log(pickMino);
     let baseMino = [[],[],[],[]];
-    
     for(let col = 0; col < baseMino.length; col++){
         for(let row = 0; row < baseMino.length; row++){
             baseMino[col][row] = pickMino[row][baseMino.length - 1 - col];
